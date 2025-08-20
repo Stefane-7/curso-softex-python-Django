@@ -18,6 +18,7 @@ nome_forma = "forma"
 valor_fances = 0.50
 valor_doce = 5.00
 valor_forma = 5.99
+
 quantidade_frances = 15
 quantidade_doce = 20
 quantidade_forma = 18
@@ -38,12 +39,12 @@ while True:
    print(F'--Bem vindo a padaria Desespero, sou a atendente {nome_atendente}')
    escolha = input(f'Temos os pães: {nome_frances, nome_doce, nome_forma}')
    if escolha == nome_frances:
-      quantidade = int(input('Qual a quantidade'))
-    if quantidade <= quantidade_frances:
-        quantidade_frances -= quantidade
-        pedidio_de_paes = quantidade
-        valor_compra = quantidade * valor_fances
-        print(f'Seu pedidio ficou em R$ {valor_compra}.')
+      quantidade = int(input('Qual a quantidade: '))
+     if quantidade <= quantidade_frances:
+         quantidade_frances -= quantidade
+         pedidio_de_paes = quantidade
+         valor_compra = quantidade * valor_fances
+         print(f'Seu pedidio ficou em R$ {valor_compra}.')
     else:
       print(f'infelizmente só tenho {quantidade_frances} pães no momento.')
 
