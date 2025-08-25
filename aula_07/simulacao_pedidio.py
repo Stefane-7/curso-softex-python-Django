@@ -20,7 +20,7 @@ while True:
     else:
         print('esse lanche não esta cadastrado, tente novamente. ') 
 
-cupom = input('Digite eu cupom de desconto: ')
+cupom = input('Digite um cupom de desconto: ')
 if cupom == cupom_desconto:
     print(f'Seu lanche custou {hamburguer_preco *0.9}')
 else:
