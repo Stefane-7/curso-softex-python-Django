@@ -40,7 +40,7 @@ while True:
    escolha = input(f'Temos os pães: {nome_frances, nome_doce, nome_forma}')
    if escolha == nome_frances:
       quantidade = int(input('Qual a quantidade: '))
-     if quantidade <= quantidade_frances:
+      if quantidade <= quantidade_frances:
          quantidade_frances -= quantidade
          pedidio_de_paes = quantidade
          valor_compra = quantidade * valor_fances
