@@ -13,14 +13,14 @@
 robo = 0
 
 while True:
-    escolha = int(input('Escolha um comando: 1-Avançar: 2-Recuar: 3-Status: 4-Desligar:'))
-    if escolha == 1:
+    escolha = input('Escolha um comando: 1-Avançar: 2-Recuar: 3-Status: 4-Desligar:')
+    if escolha == '1':
         robo += 1
-    elif escolha == 2:
+    elif escolha == '2':
         robo -= 1
-    elif escolha == 3: 
+    elif escolha == '3': 
         print(f'O robo esta na posiição: {robo}')
-    elif escolha == 4:
+    elif escolha == '4':
         print('Desligando sistema.')
         break
     else:
