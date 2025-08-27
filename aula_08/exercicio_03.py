@@ -12,7 +12,7 @@ o programa deve:
 3 - exibir a frase decodificada, voltando os numeros as vogais originais."""
 
 frase = input('Digite uma frase: ').lower
-nova_frase = frase.replace("a", "1").replace("e","2").replace("i","3").replace("o","4").replace("u","5")
+nova = frase.replace("a", "1").replace("e", "2").replace("i", "3").replace("o", "4").replace("u", "5")
 
-print(nova_frase)
+print(nova)
 print(frase)
