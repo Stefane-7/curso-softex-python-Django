@@ -11,7 +11,7 @@ o programa deve:
 2 - exibir a frase codificada, trocando as vogais pelos numeros.
 3 - exibir a frase decodificada, voltando os numeros as vogais originais."""
 
-frase = input('Digite uma frase: ').lower
+frase = input('Digite uma frase: ').lower()
 nova = frase.replace("a", "1").replace("e", "2").replace("i", "3").replace("o", "4").replace("u", "5")
 
 print(nova)
