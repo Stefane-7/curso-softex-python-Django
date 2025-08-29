@@ -36,8 +36,10 @@ while True:
      lC = int(lC)
      if lA > 0 and lB > 0 and lC > 0:
         break
+     elif lA <= 0 or lB <= 0 or lC <= 0:
+        print("Todos os números precisam ser maiores que '0' !")
   else:
-     print("Digite apenas numeros maiores que '0'!")
+     print("Digite apenas números maiores que '0'!")
 condicao_soma = (lA < lB + lC) and (lB < lA + lC) and (lC < lA + lB)
 condicao_diferenca = (lA > abs(lB - lC)) and (lB > abs(lA - lC)) and (lC > abs(lA - lB))
 if condicao_soma and condicao_diferenca:
