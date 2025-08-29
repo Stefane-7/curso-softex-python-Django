@@ -24,7 +24,7 @@ lC>∣lA−lB∣
 
 Dica: use o método abs() para ter o valor absoluto de um número."""
 
-print("###Validador de Triangulos###")
+print("###Validador de Triângulos###")
 
 while True:
   lA = input("Digite o 1° valor: ")
