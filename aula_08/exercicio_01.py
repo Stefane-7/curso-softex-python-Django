@@ -26,7 +26,7 @@ while True:
      print("Por favor digite a senha correta!")
 while True:
    email_usuario = input("Digite seu e-mail: ").lower()
-   if "@" in email_usuario and ".com" in email_usuario:
+   if "@" in email_usuario and email_usuario.endswith(".com"):
      print("E-mail válido!")
    else:
      print("E-mail inválido!")
