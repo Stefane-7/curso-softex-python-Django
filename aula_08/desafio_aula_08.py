@@ -41,7 +41,7 @@ while True:
 condicao_soma = (lA < lB + lC) and (lB < lA + lC) and (lC < lA + lB)
 condicao_diferenca = (lA > abs(lB - lC)) and (lB > abs(lA - lC)) and (lC > abs(lA - lB))
 if condicao_soma and condicao_diferenca:
-  print(f"Os valores {lA}, {lB} e {lC} formam um triangulo")
+  print(f"Os valores {lA}, {lB} e {lC} formam um triângulo")
 else:
-  print(f"Os valores {lA}, {lB} e {lC} não formam um triangulo")
+  print(f"Os valores {lA}, {lB} e {lC} não formam um triângulo")
      
