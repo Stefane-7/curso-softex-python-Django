@@ -11,7 +11,7 @@ resultado esperado:
 """
 
 numero = [1,5,2,8,5,3,5]
-numero_procurado = 6
+numero_procurado = 6 
 
 resultado = numero.count(numero_procurado)
 print(resultado)
