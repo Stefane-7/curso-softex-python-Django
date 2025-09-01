@@ -11,3 +11,9 @@ numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 Resultado Esperado:
 [2, 3, 5, 7]
 """
+
+numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+numeros_primos = []
+
+for num in numeros:
+    if 
