@@ -22,7 +22,7 @@ em_comum = []
 for item in lista1:
     if item in lista2:
         em_comum.append(item)
-print(lista2)
-print(lista1)
+print(f"Essa é a lista 1: {lista1}")
+print(f"Essa é a lista 2: {lista2}")
 print(f'Os itens em comum entre as listas são: {em_comum}')
 
