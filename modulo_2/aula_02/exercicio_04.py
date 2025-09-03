@@ -1,0 +1,23 @@
+"""        Exercício 4: Análise de Notas
+
+Você tem uma lista de tuplas (aluno, nota).
+
+-1. Identifique e imprima a maior nota alcançada.
+
+-2. Crie uma tupla com todos os alunos que tiraram a maior nota.
+
+-3. Crie um conjunto de todos os alunos que tiveram uma nota menor que 7.0.
+
+O que vai entrar:
+  notas = [("Ana", 9.5), ("João", 8.0), ("Maria", 10.0), ("Pedro", 7.5), ("Ana", 10.0), ("Carlos", 6.5)]
+
+A saída esperada:
+A maior nota alcançada é: 10.0
+Alunos que tiraram a maior nota: ('Maria', 'Ana')
+Alunos que tiveram nota menor que 7.0: {'Carlos'}"""
+
+ notas = [("Ana", 9.5), ("João", 8.0), ("Maria", 10.0), ("Pedro", 7.5), ("Ana", 10.0), ("Carlos", 6.5)]
+
+
+
+ for nome, nota in notas:
