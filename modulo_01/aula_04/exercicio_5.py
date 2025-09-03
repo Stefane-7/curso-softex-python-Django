@@ -1,0 +1,5 @@
+frase = input("Digite um texto: ")
+pa1 = input("Digite uma palavra no texto que será substituida: ")
+pa2 = input('Digite palavraque irá substituir: ')
+fa2 = frase.replace(pa1, pa2)
+print(fa2)
