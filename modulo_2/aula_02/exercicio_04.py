@@ -16,8 +16,19 @@ A maior nota alcançada é: 10.0
 Alunos que tiraram a maior nota: ('Maria', 'Ana')
 Alunos que tiveram nota menor que 7.0: {'Carlos'}"""
 
- notas = [("Ana", 9.5), ("João", 8.0), ("Maria", 10.0), ("Pedro", 7.5), ("Ana", 10.0), ("Carlos", 6.5)]
+notas = [("Ana", 9.5), ("João", 8.0), ("Maria", 10.0), ("Pedro", 7.5), ("Ana", 10.0), ("Carlos", 6.5)]
 
+maior_nota = 0.0
 
+for nome, nota in notas:
+    if nota > maior_nota:
+        maior_nota = nota
+print(f'A maior nota é: {maior_nota}')
 
- for nome, nota in notas:
+alunos_com_maior_nota = []
+
+for aluno, nota in notas:
+    if nota == maior_nota:
+        alunos_com_maior_nota.append(aluno)
+alunos_com_maior_nota = tuple(alunos_com_maior_nota)       
+print(f"\nAlunos com as maiores notas: {alunos_com_maior_nota}") 
