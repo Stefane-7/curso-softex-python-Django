@@ -18,7 +18,28 @@ estoque_online = [("Boné", 103), ("Camisa Polo", 105), ("Calça", 102), ("Chine
 A saída esperada:
 Produtos disponíveis na loja e no site:
 {('Boné', 103), ('Calça', 102)}
+
 Produtos disponíveis apenas na loja física:
 {('Camiseta', 101), ('Tênis', 104)}
+
 Produtos disponíveis apenas no site:
 {('Camisa Polo', 105), ('Chinelo', 106)}"""
+
+estoque_principal = [("Camiseta", 101), ("Calça", 102), ("Boné", 103), ("Tênis", 104)]
+estoque_online = [("Boné", 103), ("Camisa Polo", 105), ("Calça", 102), ("Chinelo", 106)]
+
+set_principal = set(estoque_principal)
+set_online = set(estoque_online)
+
+em_ambos = set_principal.intersection(set_online)
+apenas_loja = set_principal.difference(set_online)
+apenas_online = set_online.difference(set_principal)
+
+print("Produtos disponíveis na loja e no site são:")
+print(em_ambos)
+
+print("\nOs Produtos disponíveis apenas na loja física são:")
+print(apenas_loja)
+
+print("\nProdutos disponíveis apenas no site são:")
+print(apenas_online)
