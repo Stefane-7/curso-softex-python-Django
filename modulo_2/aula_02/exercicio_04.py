@@ -26,10 +26,15 @@ for nome, nota in notas:
 print(f'A maior nota é: {maior_nota}')
 
 alunos_com_maior_nota = []
+alunos_menor_7 = set()
 
 for aluno, nota in notas:
     if nota == maior_nota:
         alunos_com_maior_nota.append(aluno)
+    elif nota < 7:
+      alunos_menor_7.add(aluno)
+
 alunos_com_maior_nota = tuple(alunos_com_maior_nota)       
 print(f"\nAlunos com as maiores notas: {alunos_com_maior_nota}") 
+print(f"\nAlunos com nota menor que 7:{alunos_menor_7} ")
 
