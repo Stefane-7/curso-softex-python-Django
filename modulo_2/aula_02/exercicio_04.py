@@ -32,3 +32,4 @@ for aluno, nota in notas:
         alunos_com_maior_nota.append(aluno)
 alunos_com_maior_nota = tuple(alunos_com_maior_nota)       
 print(f"\nAlunos com as maiores notas: {alunos_com_maior_nota}") 
+
