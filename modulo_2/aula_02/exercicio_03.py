@@ -19,6 +19,7 @@ Usuários com pelo menos um login bem-sucedido:
 Usuários que tiveram somente logins com falha:
 {'Ana'}"""
 print("########### exercicio 03 ###########")
+
 acessos = [("Pedro", "sucesso"), ("Ana", "falha"), ("Maria", "sucesso"), ("Pedro", "falha"),
 ("Ana", "falha")]
 
