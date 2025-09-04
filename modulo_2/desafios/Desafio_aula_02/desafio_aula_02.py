@@ -30,13 +30,10 @@ for nome, status, duracao in dados_de_acesso:
     total += duracao
 
 usuario_bem_sucedido = set()
-usuario_mal_sucedido = set()
 for nome, status, tempo in dados_de_acesso:
   if status == "Sucesso":
     usuario_bem_sucedido.add(nome)
-  elif status == "Falha":
-    usuario_mal_sucedido.add(nome)
-
+  
 print("Registros de acessos: ")
 print(dados_de_acesso)
 
