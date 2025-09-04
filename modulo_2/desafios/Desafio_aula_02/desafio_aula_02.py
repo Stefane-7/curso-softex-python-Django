@@ -41,7 +41,7 @@ print("\nUsuarios com ao menos um login bem-sucedido: ")
 print(usuario_bem_sucedido)
 
 print("\nTempo total das sessões bem-sucedidas: ")
-print(total)
+print(f"\nTempo total das sessões bem-sucedidas: {total} minutos")
 
 
 
