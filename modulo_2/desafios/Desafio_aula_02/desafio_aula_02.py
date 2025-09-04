@@ -24,6 +24,20 @@ while True:
     except ValueError:
        print("Digite apenas dados válidos")
 
+usuario_bem_sucedido = set()
+usuario_mal_sucedido = set()
+for nome, status, tempo in dados_de_acesso:
+  if status == "Sucesso":
+    usuario_bem_sucedido.add(nome)
+  elif status == "Falha":
+    usuario_mal_sucedido.add(nome)
+
+print("Usuarios com ao menos um login bem-sucedido: ")
+print(usuario_bem_sucedido)
+
+print("\nUsuarios sem nenhum login bem-sucedido: ")
+print(usuario_mal_sucedido)
+
 
 
 
