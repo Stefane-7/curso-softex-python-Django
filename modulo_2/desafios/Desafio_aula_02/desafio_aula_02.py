@@ -1,4 +1,4 @@
-dados_de_acesso = []
+registros_acessos = []
 while True:
     try:
       nome = input("Digite o nome de usuário (ou 'parar' para sair): ").title()
@@ -19,26 +19,26 @@ while True:
         continue
         
       tuplas = (nome, status, duracao)  
-      dados_de_acesso.append(tuplas)
+      registros_acessos.append(tuplas)
       
     except ValueError:
       print("Erro: a duração deve ser um número inteiro válido.")
 
 total = 0
-for nome, status, duracao in dados_de_acesso:
+for nome, status, duracao in registros_acessos:
   if status == "Sucesso":
     total += duracao
 
-usuario_bem_sucedido = set()
-for nome, status, tempo in dados_de_acesso:
+usuarios_bem_sucedidos = set()
+for nome, status, tempo in registros_acessos:
   if status == "Sucesso":
-    usuario_bem_sucedido.add(nome)
+    usuarios_bem_sucedidos.add(nome)
   
 print("Registros de acessos: ")
 print(dados_de_acesso)
 
 print("\nUsuarios com ao menos um login bem-sucedido: ")
-print(usuario_bem_sucedido)
+print(usuarios_bem_sucedidos)
 
 print("\nTempo total das sessões bem-sucedidas: ")
 print(f"\nTempo total das sessões bem-sucedidas: {total} minutos")
