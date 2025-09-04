@@ -37,7 +37,7 @@ for nome, status, tempo in dados_de_acesso:
   elif status == "Falha":
     usuario_mal_sucedido.add(nome)
 
-print("Registros de acesso: ")
+print("Registros de acessos: ")
 print(dados_de_acesso)
 
 print("\nUsuarios com ao menos um login bem-sucedido: ")
