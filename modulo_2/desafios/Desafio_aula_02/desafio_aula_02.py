@@ -22,7 +22,12 @@ while True:
       dados_de_acesso.append(tuplas)
       
     except ValueError:
-       print("Digite apenas dados válidos")
+      print("Erro: a duração deve ser um número inteiro válido.")
+
+total = 0
+for nome, status, duracao in dados_de_acesso:
+  if status == "Sucesso":
+    total += duracao
 
 usuario_bem_sucedido = set()
 usuario_mal_sucedido = set()
@@ -32,11 +37,14 @@ for nome, status, tempo in dados_de_acesso:
   elif status == "Falha":
     usuario_mal_sucedido.add(nome)
 
-print("Usuarios com ao menos um login bem-sucedido: ")
+print("Registros de acesso: ")
+print(dados_de_acesso)
+
+print("\nUsuarios com ao menos um login bem-sucedido: ")
 print(usuario_bem_sucedido)
 
-print("\nUsuarios sem nenhum login bem-sucedido: ")
-print(usuario_mal_sucedido)
+print("\nTempo total das sessões bem-sucedidas: ")
+print(total)
 
 
 
