@@ -23,8 +23,7 @@ while True:
       
     except ValueError:
        print("Digite apenas dados válidos")
-print("\nLista de tuplas: ")
-print(dados_de_acesso)
+
 
 
 
