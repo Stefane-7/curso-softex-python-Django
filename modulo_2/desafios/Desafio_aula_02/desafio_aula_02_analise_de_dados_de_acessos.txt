@@ -2,6 +2,7 @@ Desafio: Análise de Dados de Acessos
 
 Sua tarefa é processar um fluxo de dados
 de acessos de usuários, identificando informações importantes e tratando possíveis erros. 
+
 O programa deve pedir ao usuário para inserir dados de acesso, que consistem em um nome de usuário, um status de acesso e um número que representa a duração da sessão em minutos.
 
 O usuário pode inserir quantos acessos quiser. 
