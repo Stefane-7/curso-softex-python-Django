@@ -25,22 +25,18 @@ while True:
       print("Erro: a duração deve ser um número inteiro válido.")
 
 total = 0
-for nome, status, duracao in registros_acessos:
-  if status == "Sucesso":
-    total += duracao
-
 usuarios_bem_sucedidos = set()
 for nome, status, tempo in registros_acessos:
   if status == "Sucesso":
     usuarios_bem_sucedidos.add(nome)
+    total += tempo
   
 print("Registros de acessos: ")
-print(dados_de_acesso)
+print(registros_acessos)
 
-print("\nUsuarios com ao menos um login bem-sucedido: ")
+print("\nUsuários com ao menos um login bem-sucedido: ")
 print(usuarios_bem_sucedidos)
 
-print("\nTempo total das sessões bem-sucedidas: ")
 print(f"\nTempo total das sessões bem-sucedidas: {total} minutos")
 
 
