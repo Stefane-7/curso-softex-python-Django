@@ -25,4 +25,11 @@ Soma dos números válidos: 80
 Números coletados: [10, 50, 20]
 """
 
-#numeros = []
+numeros = []
+while True:
+     entrada = input("Digite algo (ou -1 para sair): ")
+     if entrada == "-1":
+          print("encerrando...")
+          break
+     else:
+          print("ok")
