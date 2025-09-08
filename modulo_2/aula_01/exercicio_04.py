@@ -35,12 +35,10 @@ while True:
      elif entrada >= 0 and entrada <= 100:
         numeros.append(entrada)
      elif entrada > 100:
-       print("Apenas números de 0 a 100 são aceitos")
+       print("Apenas números de 0 a 100 são aceitos.")
         
-      
-     else:
-          print("ok")
   except ValueError:
     print("Digite apenas números.")
-    
-print(f"Lista de números coletados: {numeros}")
+
+print(f"Soma dos números válidos: {sum(numeros)}")
+print(f"\nLista de números coletados: {numeros}")
