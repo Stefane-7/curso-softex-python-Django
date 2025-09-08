@@ -36,5 +36,5 @@ for aluno, nota in notas:
 
 alunos_com_maior_nota = tuple(alunos_com_maior_nota)       
 print(f"\nAlunos com as maiores notas: {alunos_com_maior_nota}") 
-print(f"\nAlunos com nota menor que 7:{alunos_menor_7} ")
+print(f"\nAlunos com notas menores que 7:{alunos_menor_7} ")
 
