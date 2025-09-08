@@ -26,4 +26,3 @@ Números coletados: [10, 50, 20]
 """
 
 #numeros = []
-while True:
