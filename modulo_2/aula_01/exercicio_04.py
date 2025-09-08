@@ -27,9 +27,20 @@ Números coletados: [10, 50, 20]
 
 numeros = []
 while True:
-     entrada = input("Digite algo (ou -1 para sair): ")
-     if entrada == "-1":
+  try:
+     entrada = int(input("Digite um numero (ou -1 para sair): "))
+     if entrada == -1:
           print("encerrando...")
           break
+     elif entrada >= 0 and entrada <= 100:
+        numeros.append(entrada)
+     elif entrada > 100:
+       print("Apenas números de 0 a 100 são aceitos")
+        
+      
      else:
           print("ok")
+  except ValueError:
+    print("Digite apenas números.")
+    
+print(f"Lista de números coletados: {numeros}")
