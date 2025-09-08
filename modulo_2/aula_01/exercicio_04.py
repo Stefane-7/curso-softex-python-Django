@@ -25,6 +25,5 @@ Soma dos números válidos: 80
 Números coletados: [10, 50, 20]
 """
 
-numeros = []
- while True:
- 
+#numeros = []
+while True:
