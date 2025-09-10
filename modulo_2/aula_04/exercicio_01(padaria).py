@@ -70,3 +70,25 @@ def caucular_frete(bairros_disponiveis: dict) -> tuple[str, float] | None:
     else: 
         frete = bairros_disponiveis[bairro_encontrado]["frete"]
         return bairro_entrega_nome, frete    
+
+def cadastrar_produto(estoque: dict) -> None:
+    """Permite ao funcionario cadastrar um novo produto"""
+    nome_produto = input("Digite o nome do novo produto(identificador): ").lower()
+
+    if nome_produto in estoque:
+        print("Erro! Produto á cadastrado cpm esse identificador!!! ")
+
+    try:
+        nome_completo = ("Digite o nome completo do produto: ")
+        valor = float(input("Digite o valor do novo produto: "))
+        quantidade = int(input("Digite a quantidade inicial do produto: "))
+
+        if nome_produto and valor > 0 and quantidade > 0:
+            estoque[nome_produto]: {"nome": nome_completo, "valor": valor, "quantidade": quantidade}
+            print(f"Produto{nome_completo} cadastrado com sucesso!")
+
+        else:
+            print("Erro! Dados invalidos.")
+
+    except ValueError:
+        print("Entrada de dados inválida.")            
