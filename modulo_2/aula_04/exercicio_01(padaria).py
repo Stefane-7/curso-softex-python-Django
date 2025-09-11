@@ -66,7 +66,7 @@ def calcular_frete(bairros_disponiveis: dict) -> tuple[str, float] | None:
 
     if not bairro_encontrado:
         print("Bairro fora da área de entrega. ")
-
+        return None
     else: 
         frete = bairros_disponiveis[bairro_encontrado]["frete"]
         return bairro_entrega_nome, frete    
