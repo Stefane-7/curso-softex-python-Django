@@ -84,7 +84,7 @@ def cadastrar_produto(estoque: dict) -> None:
         quantidade = int(input("Digite a quantidade inicial do produto: "))
 
         if nome_produto and valor > 0 and quantidade > 0:
-            estoque[nome_produto]: {"nome": nome_completo, "valor": valor, "quantidade": quantidade}
+            estoque[nome_produto] = {"nome": nome_completo, "valor": valor, "quantidade": quantidade}
             print(f"Produto{nome_completo} cadastrado com sucesso!")
 
         else:
@@ -119,7 +119,7 @@ def atualizar_produto(estoque: dict) -> None:
             nova_quantidade = int(input("Digite a nova quantidade do produto: "))
             if nova_quantidade > 0:
                 estoque[nome_produto]["quantidade"] = nova_quantidade
-                print(f" Quantidade atual de {estoque[nome_produto]["quantidade"]} itens.")
+                print(f" Quantidade atual de {estoque[nome_produto]['quantidade']} itens.")
 
             else:
                 print("Quantidade inválida.")
