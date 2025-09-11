@@ -79,7 +79,7 @@ def cadastrar_produto(estoque: dict) -> None:
         print("Erro! Produto á cadastrado cpm esse identificador!!! ")
 
     try:
-        nome_completo = ("Digite o nome completo do produto: ")
+        nome_completo = input("Digite o nome completo do produto: ")
         valor = float(input("Digite o valor do novo produto: "))
         quantidade = int(input("Digite a quantidade inicial do produto: "))
 
