@@ -16,7 +16,7 @@ comercio Padaria
 def dados() -> dict:
     """Carregar e retornar os dados de produtos, frete e funcionários"""
     return{
-        "atendnte": "Maria",
+        "atendente": "Maria",
         "paes": {
             "frances": { "nome": "Pão Frances", "valor": 0.50, "quantidade": 15},
             "doce": {"nome": "Pão Doce", "valor": 5.00, "quantidade": 20},
@@ -54,13 +54,13 @@ def caucular_frete(bairros_disponiveis: dict) -> tuple[str, float] | None:
     """Caucula o valor do frete com base no bairro de entrega"""
     print("Bairros para entrega")
     for bairro in bairros_disponiveis.values():
-        print(f"- {bairro[nome]}" )
+        print(f"- {bairro['nome']}" )
 
     bairro_entrega_nome = input("Qual o bairro de entrega?").lower()
     bairro_encontrado = ""
 
     for chave, bairro in bairros_disponiveis.values():
-        if bairro[nome].lower() == bairro_entrega_nome:
+        if bairro["nome"].lower() == bairro_entrega_nome:
             bairro_encontrado = chave
             break
 
