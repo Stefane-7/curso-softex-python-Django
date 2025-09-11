@@ -77,6 +77,7 @@ def cadastrar_produto(estoque: dict) -> None:
 
     if nome_produto in estoque:
         print("Erro! Produto já cadastrado com esse identificador!!! ")
+        return
 
     try:
         nome_completo = input("Digite o nome completo do produto: ")
