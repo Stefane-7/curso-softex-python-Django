@@ -1,7 +1,7 @@
 """
 comercio Padaria
 1- O programa tem que rodar em loop infinito até ser parado
-2- O cliente pedir um tipo de pão (frances, doce, pão de forma, australiano)
+2- O cliente pedir um tipo de pão (frances, doce, pão de forma)
 3- cada pão vai ter uma quantidade
 4- valor do pão
 5- pedir forma de pagamento (dinheiro, cartao)
