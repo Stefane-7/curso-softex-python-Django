@@ -50,7 +50,7 @@ def gerar_codigo_venda(codigo_base: int) -> int:
     """gera e retorna o codigo de venda"""
     return codigo_base + 1
 
-def caucular_frete(bairros_disponiveis: dict) -> tuple[str, float] | None:
+def calcular_frete(bairros_disponiveis: dict) -> tuple[str, float] | None:
     """Caucula o valor do frete com base no bairro de entrega"""
     print("Bairros para entrega")
     for bairro in bairros_disponiveis.values():
@@ -89,7 +89,7 @@ def cadastrar_produto(estoque: dict) -> None:
             print(f"Produto{nome_completo} cadastrado com sucesso!")
 
         else:
-            print("Erro! Dados invalidos.")
+            print("Erro! Dados inválidos.")
 
     except ValueError:
         print("Entrada de dados inválida.")   
