@@ -40,7 +40,7 @@ def login_usuario(nome_salvo, senha_salva):
 
 
 def sistema():
-    nome, senha = cadastrar_usuario
+    nome, senha = cadastrar_usuario()
     login_usuario(nome, senha)          # 
 
 
