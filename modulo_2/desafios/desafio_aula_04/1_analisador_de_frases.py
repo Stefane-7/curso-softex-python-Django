@@ -35,7 +35,7 @@ def verificador_palindromo(frase: str) -> None:
         print("É um palíndromo? Não")
 
 
-frase = input("Digite uma frase: ")
+frase = input("Digite uma frase: ").lower()
 print("--- Resumo da Análise ---")
 contador_palavras(frase)
 contador_vogais_consoantes(frase)
