@@ -227,10 +227,10 @@ def iniciar_programa():
             pao_escolhido, qtd_pedido, valor_compra, paes_estoque = pedido
             print(f"Seu pedido foi de {qtd_pedido} - {pao_escolhido['nome']} total ficou em {valor_compra:.2f}.")
 
-            forma_retirada = input("É para 1- retirar ou 2- entregar?: ")
+            forma_retirada = input("É para 1 - retirar ou 2 - entregar?: ")
             valor_frete = 0.0
 
-            if forma_retirada == 2:
+            if forma_retirada == '2':
                 bairro, valor_frete = calcular_frete(bairros_disponiveis)
                 print(f"Valor do frete para o bairro {bairros_disponiveis[bairro]['nome']} é de R$ {valor_frete:.2f}")
 
@@ -262,3 +262,6 @@ def iniciar_programa():
             break
         else:
             print("Opção inválida.")
+
+
+iniciar_programa()           
