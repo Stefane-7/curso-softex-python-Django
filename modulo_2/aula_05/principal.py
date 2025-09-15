@@ -5,7 +5,7 @@ from dados_pagamento import solicitar_forma_pagamento
 from gerar_codigo import gerar_codigo_venda
 from  gerenciar_localidade import cadastrar_localidade
 from gerenciar_produto import cadastrar_produto, atualizar_produto
-print(dados)
+from gerenciar_pedido import processar_pedido
 
 
 def iniciar_programa():
