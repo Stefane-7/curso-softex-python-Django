@@ -199,9 +199,6 @@ def processar_pedido(paes_disponiveis: dict) -> tuple[dict, int, float, dict] | 
     return pao_escolhido, quantidade, valor_compra, paes_disponiveis
 
                         
-
-
-
 def iniciar_programa():
     """Fução que inicia o loop principal do programa de vendas"""
 
