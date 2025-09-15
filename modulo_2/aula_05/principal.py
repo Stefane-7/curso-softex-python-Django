@@ -1,6 +1,10 @@
 from banco_dados import dados
 from dados_cliente import obter_dados_clientes
 from caucular_frete import calcula_frete
+from dados_pagamento import solicitar_forma_pagamento
+from gerar_codigo import gerar_codigo_venda
+from  gerenciar_localidade import cadastrar_localidade
+from gerenciar_produto import cadastrar_produto, atualizar_produto
 print(dados)
 
 
