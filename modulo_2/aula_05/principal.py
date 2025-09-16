@@ -51,7 +51,7 @@ def iniciar_programa() -> None:
             banco_dados["codigo_venda_base"] = cod_venda
 
             print("-- Resumo da veda --")
-            print(f"Cliente: {dados_cliente["nome"]}")
+            print(f"Cliente: {dados_cliente['nome']}")
             print(f"Valor dos pães: R$ {valor_compra:.2f}")
             print(f"Valor do frete: R$ {valor_frete:.2f}")
             print(f"Forma de pagamento: {forma_pagamento}")
