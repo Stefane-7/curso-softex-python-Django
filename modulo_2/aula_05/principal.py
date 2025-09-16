@@ -19,7 +19,7 @@ def iniciar_programa():
     codigo_venda = banco_dados[ "codigo_vendas_base"]
 
     while True:
-        print('-- Be vindo(a) a Padaia desespero, sou o(a) atendente {atendente}.')
+        print(f'-- Be vindo(a) a Padaia desespero, sou o(a) atendente {atendente}.')
         print('1. Iniciar vendas.')
         print('2. Gerenciar Produtos.')
         print('3. Cadastrar Nova Localidade.')
