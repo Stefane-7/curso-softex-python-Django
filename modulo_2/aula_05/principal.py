@@ -71,3 +71,6 @@ def iniciar_programa():
             break
         else:
             print("Opção inválida.")
+            
+            
+iniciar_programa()
