@@ -1,7 +1,7 @@
 from banco_dados import dados
-from dados_cliente import obter_dados_clientes
+from dados_cliente import obter_dados_cliente
 from dados_pagamento import solicitar_forma_pagamento
-from gerar_codigo import codigo_venda_base
+from gerar_codigo import gerar_codigo_venda
 from calcular_frete import calcula_frete
 from gerenciar_produto import cadastrar_produto, atualizar_produto
 from gerenciar_localidade import cadastrar_localidade
@@ -40,7 +40,7 @@ def iniciar_programa() -> None:
 
             if forma_retirada == "2":
                 bairro, valor_frete = calcula_frete(bairros_disponiveis)
-                print(f"Valor do frete para o bairro {bairros_disponiveis[bairro]['nome']} é de R$ {valor_frete:.2f}")
+                print(f"Valor do frete para o bairro {bairros_disponiveis[bairro]["nome"]} é de R$ {valor_frete:.2f}")
 
 
             dados_cliente = obter_dados_cliente()
@@ -51,7 +51,7 @@ def iniciar_programa() -> None:
             banco_dados["codigo_venda_base"] = cod_venda
 
             print("-- Resumo da veda --")
-            print(f"Cliente: {dados_cliente['nome']}")
+            print(f"Cliente: {dados_cliente["nome"]}")
             print(f"Valor dos pães: R$ {valor_compra:.2f}")
             print(f"Valor do frete: R$ {valor_frete:.2f}")
             print(f"Forma de pagamento: {forma_pagamento}")
