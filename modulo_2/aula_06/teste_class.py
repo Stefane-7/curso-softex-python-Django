@@ -17,4 +17,4 @@ fala = input("O que o cachorro vai dizer?: ")
 print(meu_cachoro.nome)
 print(meu_cachoro.cor)
 
-meu_cachoro.latir(f"{fala}!")
+meu_cachoro.latir(fala)
