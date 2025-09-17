@@ -1,6 +1,7 @@
 def cadastrar_localidade(bairros: dict) -> None:
-    """Permite ao funcionario cadastrar um novo bairro para entrega"""
-    nome_bairro = input("Digite o nome do bairro(identificador): ").lower().strip()
+    """Permite ao atendente cadastrar um novo bairro para entrega"""
+    nome_bairro = input("Digite o nome do bairro (identificarod)").lower().strip()
+    
     if nome_bairro in bairros:
         print("Erro! Bairro já cadastrado.")
         return
@@ -10,10 +11,10 @@ def cadastrar_localidade(bairros: dict) -> None:
         valor_frete = float(input(f"Digite o valor do frete para o bairro {nome_completo}: "))
 
         if nome_bairro and valor_frete >= 0 and nome_completo:
-            bairros[nome_bairro] = {"nome": nome_completo, "frete": valor_frete}
-            print(f"Localidade {nome_completo} com frete de R$ {valor_frete:.2f} foi cadastrado com sucesso!")
+            bairros[nome_bairro]= {"nome": nome_completo, "frete": valor_frete}
+            print(f"Localidade {nome_completo} com frete de R$ {valor_frete:.2f} cadastrado com sucesso!")
         else:
-            print("Dados inválidos! O cadastro não foi realizado.")    
+            print("Dados inválidos! O cadastro não foi realizado.")
 
     except ValueError:
-        print("Entrada inválida! Valor do deve ser um número. ") 
+        print("Entrada inválida! O valor do frete deve ser um número.") 

@@ -1,7 +1,7 @@
 from banco_dados import dados
 from dados_cliente import obter_dados_clientes
 from dados_pagamento import solicitar_forma_pagamento
-from gerar_codigo import gerar_codigo_venda
+from gerar_codigo import codigo_venda_base
 from calcular_frete import calcula_frete
 from gerenciar_produto import cadastrar_produto, atualizar_produto
 from gerenciar_localidade import cadastrar_localidade
