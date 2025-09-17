@@ -1,5 +1,5 @@
 from banco_dados import dados
-from dados_cliente import obter_dados_cliente
+from dados_cliente import obter_dados_clientes
 from dados_pagamento import solicitar_forma_pagamento
 from gerar_codigo import gerar_codigo_venda
 from calcular_frete import calcula_frete
