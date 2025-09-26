@@ -50,7 +50,7 @@ class Quadrado(Retangulo):
 def calcular_soma_areas(formas: tuple):
     soma = 0
     for forma in formas:
-        soma += forma.calcular_area()  # chamada polimórfica
+        soma += forma.calcular_area()  
     print(f"Soma total das áreas: {soma}")
 
 
