@@ -54,7 +54,7 @@ def calcular_soma_areas(formas: tuple):
     print(f"Soma total das áreas: {soma}")
 
 
-# Script principal
+
 ret = Retangulo(5, 10, "azul")
 quad = Quadrado(4, "vermelho")
 
