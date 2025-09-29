@@ -48,6 +48,6 @@ class Cafeteria:
         self.agua.aquecer()
         print("O café esta pronto!")
 
-cafe = Cafeteria("GRao de café", "água")
+cafe = Cafeteria("Grão de café", "água")
 
 cafe.preparar_cafe()
