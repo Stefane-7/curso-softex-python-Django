@@ -51,3 +51,5 @@ class Cafeteria:
 cafe = Cafeteria("Grão de café", "água")
 
 cafe.preparar_cafe()
+
+
