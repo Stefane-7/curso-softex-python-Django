@@ -25,8 +25,8 @@ from escola import Escola
 estudante1 = Estudante('Maria', 21, 32495089)
 estudante2 = Estudante('Roberta', 45, 25901012)
 
-estudante1.set_nota('Matemática', 10.0)
-estudante2.set_nota('Portugues', 5.8)
+estudante1.set_nota('Matemática', 5.6)
+estudante2.set_nota('Portugues', 9.00)
 
 
 escola1 = Escola()
