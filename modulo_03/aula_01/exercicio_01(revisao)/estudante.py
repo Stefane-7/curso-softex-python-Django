@@ -1,16 +1,20 @@
 from pessoa import Pessoa
 
 class Estudante(Pessoa):
-    materias = {}
     def __init__(self, nome, idade, matricula):
         super().__init__(nome, idade)
         self.matricula = matricula
-        #self.materias = {}
+        self._materias = {}
 
-    def add_nota_materia(self, materia, nota):
-        aula = materias.get(materia)
+    @property
+    def notas(self):
+        return self._materias 
+    
+    @notas.setter
+    def notas(self, materia, nota):
+        aula = self._materias.get(materia)
         if aula:
             aula.append(nota)
         else:
-            materias[materia] = [nota]         
+            self._materias[materia] = [nota]         
         

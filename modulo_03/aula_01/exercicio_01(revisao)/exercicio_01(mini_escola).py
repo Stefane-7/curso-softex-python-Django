@@ -31,4 +31,4 @@ Seu trabalho aqui:
 ● Use os métodos que você criou para:
 ○ Adicionar algumas matérias e notas para cada estudante.
 ○ Adicionar os estudantes à sua Escola.
-● Chame o método mostrar_relatorio() da sua Escola para ver a mágica acontecer!"""
+● Chame o método mostrar_relatorio() da sua Escola para ver a mágica acontecer!""",0
