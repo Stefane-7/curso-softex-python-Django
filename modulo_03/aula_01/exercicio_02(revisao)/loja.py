@@ -6,3 +6,18 @@ Seu trabalho aqui:
 ● Use um dicionário para gerenciar o estoque de cada produto, onde a "chave" é o nome do produto e o "valor" é a quantidade disponível.
 ● Crie um método adicionar_produto_ao_estoque() que recebe um produto e a quantidade, e o adiciona à sua lista e ao seu dicionário de estoque.
 ● Crie um método verificar_estoque_de_produto() que retorna a quantidade em estoque de um produto específico."""
+
+from produto_eletronico import ProdutoEletronico
+
+class Loja:
+    def __init__(self):
+        self.produtos = []
+        self.estoque = {}
+
+    def adicionar_produto_ao_estoque(self, produto, quantidade):
+        self.produtos.append(produto)
+        self.estoque[produto.nome] = quantidade
+        produto.set_quantidade_em_estoque(quantidade)
+
+    def verificar_estoque_de_produto(self, nome_produto):
+        return self.estoque.get(nome_produto, 0)
