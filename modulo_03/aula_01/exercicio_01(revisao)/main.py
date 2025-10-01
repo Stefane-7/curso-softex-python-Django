@@ -27,7 +27,7 @@ estudante2 = Estudante('Roberta', 45, 25901012)
 
 estudante1.set_nota('Matemática', 5.6)
 estudante2.set_nota('Portugues', 9.00)
-
+estudante2.set_nota(8.0)
 
 escola1 = Escola()
 
