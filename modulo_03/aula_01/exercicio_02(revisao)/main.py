@@ -8,3 +8,7 @@ Seu trabalho aqui:
 ○ Adicionar algumas matérias e notas para cada estudante.
 ○ Adicionar os estudantes à sua Escola.
 ● Chame o método mostrar_relatorio() da sua Escola para ver a mágica acontecer!"""
+
+from estudante import Estudante
+from escola import Escola
+from 
