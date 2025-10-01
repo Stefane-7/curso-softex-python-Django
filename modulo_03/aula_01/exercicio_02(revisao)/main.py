@@ -9,6 +9,19 @@ Seu trabalho aqui:
 ○ Adicionar os estudantes à sua Escola.
 ● Chame o método mostrar_relatorio() da sua Escola para ver a mágica acontecer!"""
 
-from estudante import Estudante
+"""from estudante import Estudante
 from escola import Escola
-from 
+from""" 
+
+class Loja:
+    def __init__(self):
+        self.produtos = []
+        self.estoque = {}
+
+    def adicionar_produto_ao_estoque(self, produto, quantidade):
+        self.produtos.append(produto)
+        self.estoque[produto.nome] = quantidade
+        produto.set_quantidade_em_estoque(quantidade)
+
+    def verificar_estoque_de_produto(self, nome_produto):
+        return self.estoque.get(nome_produto, 0)
