@@ -25,7 +25,7 @@ def home(request):
     todas_as_tarefas = Tarefa.objects.all().order_by('-criada_em') # Ordena pelas mais novas
     # 9. Atualize o contexto para incluir o formulário
     context = {
-    'nome_usuario': 'Júnior',
+    'nome_usuario': 'Algúem',
     'tecnologias': ['Python', 'Django', 'Models', 'Forms'],
     'tarefas': todas_as_tarefas,
     'form': form, # 10. Envie o 'form' (vazio ou com erros) para o template
