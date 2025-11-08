@@ -3,6 +3,14 @@
 {% block content %}
  <h1>Olá, {{ nome_usuario }}!</h1>
  <p>Este HTML está separado do meu código Python.</p>
+ <hr>
+<h3>Nova Tarefa:</h3>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Adicionar Tarefa</button>
+</form>
+ 
  <h3>Tecnologias que estou aprendendo:</h3>
  <ul>
     {% for tec in tecnologias %}
@@ -13,6 +21,7 @@
     <p>Este é um conteúdo especial para o Júnior!</p>
  {% endif %}
  <hr>
+
  <h2>Minha Lista de Tarefas (do Banco de Dados):</h2>
  <ul>
     {% for tarefa in tarefas %}
@@ -25,6 +34,19 @@
         {% endif %}
         <br>
         <small>Criada em: {{ tarefa.criada_em }}</small>
+        <br>
+
+          <!-- 🔘 Novo botão: alternar status -->
+       <a href="{% url 'alternar_tarefa' tarefa.id %}">
+             {% if tarefa.concluida %}
+                 Desmarcar
+             {% else %}
+                 Marcar como Concluída
+             {% endif %}
+        </a> |
+
+        <a href="{% url 'editar_tarefa' tarefa.id %}">Editar</a> |
+        <a href="{% url 'excluir_tarefa' tarefa.id %}">Excluir</a>
      </li>
     {% empty %}
      <li>Você ainda não tem tarefas cadastradas.</li>
