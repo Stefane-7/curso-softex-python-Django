@@ -16,3 +16,11 @@ class Tarefa(models.Model):
     # Isso é EXTREMAMENTE útil no painel de administração.
     def __str__(self):
      return self.titulo
+
+class Execucao(models.Model):
+   nome =   models.CharField(max_length=100) 
+   criada_em = models.DateTimeField(auto_now_add=True)
+   concluida = models.BooleanField(default=False)
+
+   def __str__(self):
+     return self.titulo

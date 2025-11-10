@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Tarefa # 1. Importe o Model Tarefa
+from .models import Tarefa, Execucao # 1. Importe o Model Tarefa
 from .forms import TarefaForm
 
 # Create your views here.
@@ -23,12 +23,14 @@ def home(request):
         form = TarefaForm() # Cria um formulário vazio
         # 8. A busca de dados (fora dos 'ifs', pois é necessária sempre)
     todas_as_tarefas = Tarefa.objects.all().order_by('-criada_em') # Ordena pelas mais novas
+    execucao = Execucao.objects.all()
     # 9. Atualize o contexto para incluir o formulário
     context = {
     'nome_usuario': 'Algúem',
     'tecnologias': ['Python', 'Django', 'Models', 'Forms'],
     'tarefas': todas_as_tarefas,
     'form': form, # 10. Envie o 'form' (vazio ou com erros) para o template
+    'execucao': execucao
     }
     return render(request, 'home.html', context)
 
