@@ -61,4 +61,3 @@ def alternar_tarefa(request, id):
     tarefa.concluida = not tarefa.concluida  # inverte o valor atual
     tarefa.save()
     return redirect('home')
-  
