@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Tarefa, Execucao # 1. Importe o Model Tarefa
 from .forms import TarefaForm
-
 # Create your views here.
 def home(request):
     # 3. Lógica de POST: Se o formulário foi enviado
@@ -22,6 +21,7 @@ def home(request):
     else:
         form = TarefaForm() # Cria um formulário vazio
         # 8. A busca de dados (fora dos 'ifs', pois é necessária sempre)
+
     todas_as_tarefas = Tarefa.objects.all().order_by('-criada_em') # Ordena pelas mais novas
     execucao = Execucao.objects.all()
     # 9. Atualize o contexto para incluir o formulário
