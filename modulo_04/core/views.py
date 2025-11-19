@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Tarefa, Execucao # 1. Importe o Model Tarefa
+from django.contrib.auth.forms import UserCreationForm 
+from django.contrib.auth import login 
+from .models import Tarefa, Execucao 
 from .forms import TarefaForm
+
 # Create your views here.
 def home(request):
     # 3. Lógica de POST: Se o formulário foi enviado
@@ -61,3 +64,4 @@ def alternar_tarefa(request, id):
     tarefa.concluida = not tarefa.concluida  # inverte o valor atual
     tarefa.save()
     return redirect('home')
+

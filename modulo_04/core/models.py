@@ -1,9 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 # Cada classe aqui é "traduzida" para uma tabela no banco de dados
 class Tarefa(models.Model):
-# Um campo de texto curto, com máximo de 200 caracteres
+    
+    # 'on_delete=models.CASCADE' diz ao banco:
+    # "Se o usuário for deletado, delete todas as tarefas dele também."
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # Um campo de texto curto, com máximo de 200 caracteres
     titulo = models.CharField(max_length=200)
     # Um campo booleano (verdadeiro/falso), que por padrão é Falso
     concluida = models.BooleanField(default=False)
