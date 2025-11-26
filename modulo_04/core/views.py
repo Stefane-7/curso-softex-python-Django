@@ -2,47 +2,43 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth import login 
-from .models import Tarefa, Execucao 
+from .models import Tarefa
 from .forms import TarefaForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def home(request):
     # 3. Lógica de POST: Se o formulário foi enviado
     if request.method == 'POST':
         # Cria uma instância do form e preenche com os dados do POST
         form = TarefaForm(request.POST)
-        # 4. O Django valida os dados (max_length, etc.)
         if form.is_valid():
-            # 5. Salva o objeto no banco de dados!
-            form.save()
-            # 6. Redireciona de volta para a 'home'
-            # Isso é o Padrão "Post-Redirect-Get" (PRG)
+            # MUDANÇA 1: Salvando com o usuário
+            #
+            # 'commit=False' cría o objeto na memória, mas não salva no banco.
+            tarefa = form.save(commit=False)
+            # Atribui o usuário logado (request.user) ao campo 'user' da tarefa
+            tarefa.user = request.user
+            # Agora sim, salva o objeto completo no banco
+            tarefa.save()
             return redirect('home')
-        # Se o form NÃO for válido, o código continua e
-        # o 'form' (com os erros) será enviado para o template
-        # 7. Lógica de GET: Se o usuário apenas visitou a página
     else:
         form = TarefaForm() # Cria um formulário vazio
         # 8. A busca de dados (fora dos 'ifs', pois é necessária sempre)
 
-    todas_as_tarefas = Tarefa.objects.all().order_by('-criada_em') # Ordena pelas mais novas
-    execucao = Execucao.objects.all()
-    # 9. Atualize o contexto para incluir o formulário
+    todas_as_tarefas = Tarefa.objects.filter(user=request.user).order_by('-criada_em')
     context = {
-    'nome_usuario': 'Algúem',
-    'tecnologias': ['Python', 'Django', 'Models', 'Forms'],
+    'nome_usuario':  request.user.username,
+    'tecnologias': ['Autenticação', 'ForeignKey', 'Login'],
     'tarefas': todas_as_tarefas,
     'form': form, # 10. Envie o 'form' (vazio ou com erros) para o template
-    'execucao': execucao
     }
     return render(request, 'home.html', context)
 
-def home_2(request):
-# Vamos retornar a resposta HTTP mais simples: um texto HTML
-    return HttpResponse("<h1>Olá, Mundo! Esta é minha segunda página Django!</h1>")
-    
+@login_required    
 def editar_tarefa(request, id):
-    tarefa = get_object_or_404(Tarefa, id=id)
+    tarefa = get_object_or_404(Tarefa, id=id, user=request.user)
 
     if request.method == 'POST':
         form = TarefaForm(request.POST, instance=tarefa)
@@ -54,14 +50,33 @@ def editar_tarefa(request, id):
 
     return render(request, 'editar_tarefa.html', {'form': form, 'tarefa': tarefa})  
 
+@login_required
 def excluir_tarefa(request, id):
-    tarefa = get_object_or_404(Tarefa, id=id)
+    tarefa = get_object_or_404(Tarefa, id=id, user=request.user)
     tarefa.delete()
     return redirect('home')
 
+@login_required
 def alternar_tarefa(request, id):
-    tarefa = get_object_or_404(Tarefa, id=id)
+    tarefa = get_object_or_404(Tarefa, id=id, user=request.user)
     tarefa.concluida = not tarefa.concluida  # inverte o valor atual
     tarefa.save()
     return redirect('home')
 
+def register(request):
+    # Se a requisição for POST, o usuário enviou o formulário
+    if request.method == 'POST':
+        # Cria uma instância do formulário com os dados enviados
+        form = UserCreationForm(request.POST)
+        # Verifica se o formulário é válido (ex: senhas batem, username não existe)
+        if form.is_valid():
+            user = form.save() # Salva o novo usuário no banco
+            login(request, user) # Faz o login automático do usuário
+            return redirect('home') # Redireciona para a home
+
+    else:
+        form = UserCreationForm() # Cria um formulário de cadastro vazio
+
+        # Prepara o contexto e renderiza o template
+        context = {'form': form}
+        return render(request, 'register.html', context)
