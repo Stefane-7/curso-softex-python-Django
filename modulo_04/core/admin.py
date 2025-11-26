@@ -1,10 +1,10 @@
 from django.contrib import admin
 from .models import Tarefa # 1. Importe seu Model
-# Register your models here.
+from projects.models import Project
 class TarefaAdmin(admin.ModelAdmin):
-    list_display = ('titulo', 'user', 'get_user_email','concluida', 'criada_em')
-    list_filter = ('concluida', 'user', 'criada_em')
-    search_fields = ('titulo', 'user__username')
+    list_display = ('titulo', 'user', 'get_user_email','concluida', 'criada_em', 'project')
+    list_filter = ('concluida', 'user', 'criada_em', 'project' )
+    search_fields = ('titulo', 'user__username', 'project')
 
     fieldsets = (
         ('Informações Principais', {
@@ -22,4 +22,5 @@ class TarefaAdmin(admin.ModelAdmin):
         return obj.user.email
 
 
-admin.site.register(Tarefa, TarefaAdmin)
+admin.site.register(Tarefa, TarefaAdmin,)
+#admin.site.register(ProjectAdmin)
