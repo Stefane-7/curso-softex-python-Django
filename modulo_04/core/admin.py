@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Tarefa, Execucao # 1. Importe seu Model
+from .models import Tarefa # 1. Importe seu Model
 # Register your models here.
 class TarefaAdmin(admin.ModelAdmin):
     # 'list_display' é uma tupla com os nomes dos campos
@@ -11,4 +11,4 @@ class TarefaAdmin(admin.ModelAdmin):
     # - 'criada_em': Filtro de data (Hoje, Últimos 7 dias, Este mês, etc.)
     list_filter = ('concluida', 'user', 'criada_em')
 
-admin.site.register(Tarefa, TarefaAdmin, Execucao)
+admin.site.register(Tarefa, TarefaAdmin)
