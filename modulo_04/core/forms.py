@@ -1,5 +1,5 @@
 from django import forms
-from .models import Tarefa #, Execucao # Importe o Model
+from .models import Tarefa 
 from projects.models import Project
 
 # Esta classe herda de 'ModelForm'
@@ -13,8 +13,8 @@ class TarefaForm(forms.ModelForm):
         
         if user:
             self.fields['project'].queryset = Project.objects.filter(user=user) 
-class Meta:
+    class Meta:
         model = Tarefa
       
-        fields = ['titulo']
+        fields = ['titulo', 'project']
 
