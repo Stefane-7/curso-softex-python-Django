@@ -12,27 +12,22 @@ def home(request):
     # 3. Lógica de POST: Se o formulário foi enviado
     if request.method == 'POST':
         # Cria uma instância do form e preenche com os dados do POST
-        form = TarefaForm(request.POST)
+        form = TarefaForm(request.POST, user=request.user)
         if form.is_valid():
-            # MUDANÇA 1: Salvando com o usuário
-            #
-            # 'commit=False' cría o objeto na memória, mas não salva no banco.
+            
             tarefa = form.save(commit=False)
-            # Atribui o usuário logado (request.user) ao campo 'user' da tarefa
             tarefa.user = request.user
-            # Agora sim, salva o objeto completo no banco
             tarefa.save()
             return redirect('home')
     else:
-        form = TarefaForm() # Cria um formulário vazio
-        # 8. A busca de dados (fora dos 'ifs', pois é necessária sempre)
+       form = TarefaForm(user=request.user) 
 
     todas_as_tarefas = Tarefa.objects.filter(user=request.user).order_by('-criada_em')
     context = {
     'nome_usuario':  request.user.username,
     'tecnologias': ['Autenticação', 'ForeignKey', 'Login'],
     'tarefas': todas_as_tarefas,
-    'form': form, # 10. Envie o 'form' (vazio ou com erros) para o template
+    'form': form,
     }
     return render(request, 'home.html', context)
 
