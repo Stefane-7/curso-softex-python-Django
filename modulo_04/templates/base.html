@@ -15,7 +15,7 @@
              <span>Olá, {{ user.username }}!</span> | <form action="{% url 'logout' %}" method="POST" style="display: inline;">
               {% csrf_token %}
                 <button type="submit" style="background:none; border:none;
-                padding:0; color:blue; text-decoration:underline; cursor:pointer;">
+                padding:0; color:rgb(236, 55, 130); text-decoration:underline; cursor:pointer;">
                  Sair (Logout)
                </button>
             </form>
