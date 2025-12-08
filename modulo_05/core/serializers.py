@@ -8,6 +8,15 @@ class TarefaSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'titulo', 'concluida', 'criada_em']
         # Campos gerados automaticamente (não aceitos na entrada)
         read_only_fields = ['id', 'criada_em']
+        titulo = serializers.CharField(
+            max_length=200,
+            error_messages={
+                'required': 'O título é obrigatório.',
+                'blank': 'O título não pode ser vazio.',
+                'max_length': 'O título não pode ter mais de 200 caracteres.'
+                }
+            )
+
 
     def validate_titulo(self, value):
    
@@ -30,6 +39,8 @@ class TarefaSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
             "O título não pode conter apenas números."
             )
+        
+       
 
         return value
 

@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Tarefa
 from .serializers import TarefaSerializer
+from django.db import IntegrityError
 class ListaTarefasAPIView(APIView):
     
    
@@ -16,7 +17,9 @@ class ListaTarefasAPIView(APIView):
     def post(self, request, format=None):
     
         # 1. INSTANCIAR: Criar serializer com dados recebidos
-        serializer = TarefaSerializer(data=request.data)
+        serializer = TarefaSerializer(
+            data=request.data,
+            )
 
         # 2. VALIDAR: Checar se os dados são válidos
         if serializer.is_valid():
