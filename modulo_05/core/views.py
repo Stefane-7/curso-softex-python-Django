@@ -71,10 +71,22 @@ class TarefasEstatisticasAPIView(APIView):
         return Response(dados, status=status.HTTP_200_OK)
     
 class DetalheTarefaAPIView(APIView):
-    def get(self, request, pk, format=None):
-        tarefa = get_object_or_404(Tarefa, pk=pk)
+   def get_object(self, pk):
+        return get_object_or_404(Tarefa, pk=pk)
+   def get(self, request, pk, format=None):
+        tarefa = self.get_object(pk)
         serializer = TarefaSerializer(tarefa)
-        return Response(
-            f"Buscando tarefa com ID: {pk}",
-            status=status.HTTP_200_OK,
-        )
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+   def put(self, request, pk, format=None):
+    
+        tarefa = self.get_object(pk)
+       
+        serializer = TarefaSerializer(tarefa, data=request.data)
+        
+        if serializer.is_valid():
+        
+            serializer.save()
+       
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
