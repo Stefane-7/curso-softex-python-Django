@@ -7,6 +7,8 @@ class Tarefa(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
+        null=True,
+        blank=True,
         related_name='tarefas', # Permite user.tarefas.all()
         verbose_name='Usuário'
     )
@@ -24,6 +26,12 @@ class Tarefa(models.Model):
     criada_em = models.DateTimeField(
     auto_now_add=True,
     verbose_name='Criada em'
+    )
+    
+    prazo = models.DateField(
+        null=True, 
+        blank=True,
+        verbose_name='Prazo'
     )
     class Meta:
         verbose_name = 'Tarefa'
