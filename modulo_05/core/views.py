@@ -6,6 +6,7 @@ from django.db.models import Count
 from .models import Tarefa
 from .serializers import TarefaSerializer
 from django.db import IntegrityError
+from datetime import date
 import logging
 logger = logging.getLogger(__name__)
 
@@ -108,9 +109,33 @@ class DetalheTarefaAPIView(APIView):
        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
    
-class DetalheTarefaAPIView(APIView):
-    def delete(self, request, pk, format=None):
+
+   def delete(self, request, pk, format=None):
         
         tarefa = self.get_object(pk)
         tarefa.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class DuplicarTarefaAPIView(APIView):
+    def post(self, request, pk):
+        tarefa_original = get_object_or_404(Tarefa, pk=pk)
+
+        nova_tarefa = Tarefa.objects.create(
+            titulo=tarefa_original.titulo + " (cópia)",
+            concluida=False,
+            data_conclusao=None
+        )
+
+        serializer = TarefaSerializer(nova_tarefa)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class ConcluirTodasTarefasAPIView(APIView):
+    def patch(self, request):
+        hoje = date.today()
+
+        Tarefa.objects.update(concluida=True, data_conclusao=hoje)
+
+        return Response(
+            {"mensagem": "Todas as tarefas foram concluídas."},
+            status=status.HTTP_200_OK
+        )

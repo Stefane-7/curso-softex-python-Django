@@ -49,6 +49,12 @@ class Tarefa(models.Model):
         blank=True,
         verbose_name='Prazo'
     )
+    
+    data_conclusao = models.DateField(
+        null=True, 
+        blank=True,
+        verbose_name= 'Data de Conclusão'
+    )
 
     class Meta:
         verbose_name = 'Tarefa'

@@ -16,7 +16,7 @@ class TarefaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tarefa
-        fields = ['id', 'titulo', 'concluida','criada_em','prioridade','prazo']
+        fields = ['id', 'titulo', 'concluida','criada_em','prioridade','prazo', 'data_conclusao']
         read_only_fields = ['id', 'criada_em']
 
 
@@ -54,6 +54,21 @@ class TarefaSerializer(serializers.ModelSerializer):
         if not concluida and prazo is None:
             raise serializers.ValidationError(
                 {'prazo': 'O prazo é obrigatório quando a tarefa não está concluída.'}
+                
 )
 
+        concluida_atual = (
+        concluida 
+        
+        if concluida is not None 
+        else getattr(self.instance, 'concluida', False)
+    )
+
+        if concluida_atual:
+            
+            data['data_conclusao'] = date.today()
+        else:
+            
+            data['data_conclusao'] = None
+        
         return data
