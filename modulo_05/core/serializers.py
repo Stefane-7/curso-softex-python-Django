@@ -44,6 +44,7 @@ class TarefaSerializer(serializers.ModelSerializer):
     def validate(self, data):
         prazo = data.get('prazo')
         concluida = data.get('concluida', False)
+        request = self.context.get('request')
 
         if prazo and prazo < date.today():
             raise serializers.ValidationError(
@@ -56,6 +57,33 @@ class TarefaSerializer(serializers.ModelSerializer):
                 {'prazo': 'O prazo é obrigatório quando a tarefa não está concluída.'}
                 
 )
+            
+        metodo = request.method if request else None
+
+        prioridade = data.get(
+            'prioridade',
+            getattr(self.instance, 'prioridade', None)
+        )
+
+        if (
+            prioridade == 'alta'
+            and concluida is True
+            and metodo == 'PATCH'
+        ):
+            raise serializers.ValidationError({
+                'concluida': 'Tarefas com prioridade ALTA só podem ser concluídas via PUT.'
+            })    
+        
+        prioridade_atual = self.instance.prioridade
+
+        if (
+            prioridade_atual == 'alta'
+            and 'prioridade' in data
+            and metodo == 'PATCH'
+        ):
+            raise serializers.ValidationError({
+                'prioridade': 'A prioridade de uma tarefa ALTA não pode ser alterada via PATCH.'
+            })    
 
         concluida_atual = (
         concluida 

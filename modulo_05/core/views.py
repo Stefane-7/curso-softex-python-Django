@@ -84,7 +84,11 @@ class DetalheTarefaAPIView(APIView):
     
         tarefa = self.get_object(pk)
        
-        serializer = TarefaSerializer(tarefa, data=request.data)
+        serializer = TarefaSerializer(
+            tarefa, 
+            data=request.data,
+            context={'request': request}
+            )
         
         if serializer.is_valid():
         
@@ -98,7 +102,8 @@ class DetalheTarefaAPIView(APIView):
         serializer = TarefaSerializer(
         tarefa,
         data=request.data,
-        partial=True # <--- ESSENCIAL PARA O PATCH
+        partial=True, # <--- ESSENCIAL PARA O PATCH
+        context={'request': request}
         )
       
         if serializer.is_valid():
