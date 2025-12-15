@@ -8,6 +8,7 @@ from .serializers import TarefaSerializer
 from django.db import IntegrityError
 from datetime import date
 import logging
+from rest_framework.permissions import IsAuthenticated
 logger = logging.getLogger(__name__)
 
 class ListaTarefasAPIView(APIView):
@@ -144,3 +145,14 @@ class ConcluirTodasTarefasAPIView(APIView):
             {"mensagem": "Todas as tarefas foram concluídas."},
             status=status.HTTP_200_OK
         )
+
+class MinhaView(APIView):
+    # Adicionando a permissão
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+    # Se chegou aqui, request.user é SEMPRE um objeto User logado
+        print(f"Usuário autenticado: {request.user.username}")
+        return Response(f"Usuário autenticado: {request.user.username}",
+                        status=status.HTTP_200_ok
+                        )
+        
