@@ -9,9 +9,14 @@ from django.db import IntegrityError
 from datetime import date
 import logging
 from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.tokens import RefreshToken
+
 logger = logging.getLogger(__name__)
 
 class ListaTarefasAPIView(APIView):
+    
+    permission_classes = [IsAuthenticated]
+
     
    
     def get(self, request, format=None):
@@ -30,7 +35,7 @@ class ListaTarefasAPIView(APIView):
                 )
             
             if serializer.is_valid():
-                serializer.save()
+                serializer.save(user=self.request.user)
                 logger.info(f"[INFO]: Tarefa criada: {serializer.data['id']}")
                 return Response(
                     serializer.data,
@@ -56,6 +61,8 @@ class ListaTarefasAPIView(APIView):
             )
             
 class TarefasEstatisticasAPIView(APIView):
+    
+
     def get(self, request):
         total = Tarefa.objects.count()
         concluidas = Tarefa.objects.filter(concluida=True).count()
@@ -73,6 +80,8 @@ class TarefasEstatisticasAPIView(APIView):
         return Response(dados, status=status.HTTP_200_OK)
     
 class DetalheTarefaAPIView(APIView):
+    
+    
     
    def get_object(self, pk):
         return get_object_or_404(Tarefa, pk=pk)
@@ -136,6 +145,9 @@ class DuplicarTarefaAPIView(APIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 class ConcluirTodasTarefasAPIView(APIView):
+    
+    permission_classes = [IsAuthenticated]
+
     def patch(self, request):
         hoje = date.today()
 
@@ -149,10 +161,65 @@ class ConcluirTodasTarefasAPIView(APIView):
 class MinhaView(APIView):
     # Adicionando a permissão
     permission_classes = [IsAuthenticated]
+    
     def get(self, request):
-    # Se chegou aqui, request.user é SEMPRE um objeto User logado
-        print(f"Usuário autenticado: {request.user.username}")
-        return Response(f"Usuário autenticado: {request.user.username}",
-                        status=status.HTTP_200_ok
-                        )
+        user = request.user
+
+        return Response(
+            {
+                "id": user.id,
+                "username": user.username,
+                "email": user.email,
+                "is_staff": user.is_staff,
+                "date_joined": user.date_joined
+            },
+            status=status.HTTP_200_OK
+        )
+
+class LogoutView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def post(self, request):
+        try:
+            refresh_token = request.data.get("refresh")
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response(
+                {"detail": "Logout realizado com sucesso."},
+                status=status.HTTP_205_RESET_CONTENT,
+            )
+        except Exception:
+            return Response(
+            {"detail": "Token inválido."},
+            status=status.HTTP_400_BAD_REQUEST
+        ) 
+            
+class ChangePasswordView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+
+        old_password = request.data.get("old_password")
+        new_password = request.data.get("new_password")
+
+        if not old_password or not new_password:
+            return Response(
+                {"error": "Informe a senha atual e a nova senha."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if not user.check_password(old_password):
+            return Response(
+                {"error": "Senha atual incorreta."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        user.set_password(new_password)
+        user.save()
+
+        return Response(
+            {"detail": "Senha alterada com sucesso."},
+            status=status.HTTP_200_OK
+        )       
         

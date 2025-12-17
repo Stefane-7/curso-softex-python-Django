@@ -23,8 +23,6 @@ class Tarefa(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        null=True,
-        blank=True,
         related_name='tarefas',  # Permite user.tarefas.all()
         verbose_name='Usuário'
     )
