@@ -3,7 +3,6 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
 from rest_framework import status
-from django.db.models import Count
 from .models import Tarefa
 from .serializers import TarefaSerializer
 from django.db import IntegrityError
