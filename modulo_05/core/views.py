@@ -1,11 +1,13 @@
+from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Tarefa
-from .serializers import TarefaSerializer
-from django.db import IntegrityError
+from .serializers import TarefaSerializer, UserRegistrationSerializer
+from rest_framework.permissions import AllowAny
 from datetime import date
 import logging
 from rest_framework.permissions import IsAuthenticated
@@ -14,8 +16,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 logger = logging.getLogger(__name__)
 
+
 class ListaTarefasAPIView(ListCreateAPIView):
-    
 
     serializer_class = TarefaSerializer
     permission_classes = [IsAuthenticated]
@@ -25,12 +27,11 @@ class ListaTarefasAPIView(ListCreateAPIView):
         return Tarefa.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
-       
+
         serializer.save(user=self.request.user)
 
 
 class TarefasEstatisticasAPIView(APIView):
-    
 
     def get(self, request):
         total = Tarefa.objects.count()
@@ -47,13 +48,14 @@ class TarefasEstatisticasAPIView(APIView):
         }
 
         return Response(dados, status=status.HTTP_200_OK)
-    
+
+
 class DetalheTarefaAPIView(RetrieveUpdateDestroyAPIView):
 
     serializer_class = TarefaSerializer
 
     def get_queryset(self):
-        
+
         return Tarefa.objects.filter(user=self.request.user)
 
     def get_permissions(self):
@@ -64,7 +66,8 @@ class DetalheTarefaAPIView(RetrieveUpdateDestroyAPIView):
             return [IsAuthenticated(), PodeEditarTarefa()]
 
         return [IsAuthenticated()]
-    
+
+
 class DuplicarTarefaAPIView(APIView):
     def post(self, request, pk):
         tarefa_original = get_object_or_404(Tarefa, pk=pk)
@@ -78,8 +81,9 @@ class DuplicarTarefaAPIView(APIView):
         serializer = TarefaSerializer(nova_tarefa)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+
 class ConcluirTodasTarefasAPIView(APIView):
-    
+
     permission_classes = [IsAuthenticated]
 
     def patch(self, request):
@@ -92,10 +96,11 @@ class ConcluirTodasTarefasAPIView(APIView):
             status=status.HTTP_200_OK
         )
 
+
 class MinhaView(APIView):
-    
+
     permission_classes = [IsAuthenticated]
-    
+
     def get(self, request):
         user = request.user
 
@@ -110,9 +115,10 @@ class MinhaView(APIView):
             status=status.HTTP_200_OK
         )
 
+
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
-    
+
     def post(self, request):
         try:
             refresh_token = request.data.get("refresh")
@@ -124,10 +130,11 @@ class LogoutView(APIView):
             )
         except Exception:
             return Response(
-            {"detail": "Token inválido."},
-            status=status.HTTP_400_BAD_REQUEST
-        ) 
-            
+                {"detail": "Token inválido."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+
 class ChangePasswordView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -155,5 +162,14 @@ class ChangePasswordView(APIView):
         return Response(
             {"detail": "Senha alterada com sucesso."},
             status=status.HTTP_200_OK
-        )       
-        
+        )
+
+
+class RegisterView(generics.CreateAPIView):
+    """
+    Endpoint para cadastro de novos usuários.
+    Acesso: Público (Qualquer um pode criar conta).
+    """
+    queryset = User.objects.all()
+    permission_classes = [AllowAny]  # Sobrescreve o padrão global
+    serializer_class = UserRegistrationSerializer

@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from .models import Tarefa
 from datetime import date
@@ -93,3 +94,55 @@ class TarefaSerializer(serializers.ModelSerializer):
             data['data_conclusao'] = None
 
         return data
+    
+class UserRegistrationSerializer(serializers.ModelSerializer):
+    
+    # Definimos 'write_only=True' para que a senha seja aceita no cadastro (POST),
+    # mas NUNCA seja devolvida na resposta (Response JSON).
+    password = serializers.CharField(
+    write_only=True,
+    required=True,
+    style={'input_type': 'password'}
+    )
+    
+    password2 = serializers.CharField(
+        write_only=True,
+        required=True,
+        style={'input_type': 'password'}
+    )
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password', 'password2']
+        
+    def validate(self, data):
+        if data['password'] != data['password2']:
+            raise serializers.ValidationError(
+                {"password": "As senhas não conferem."}
+            )
+        return data
+    
+    def create(self, validated_data):
+        """
+        Intercepta a criação para usar o 'create_user' e hashear a senha.
+        """
+        validated_data.pop('password2')
+
+        # Extrai a senha dos dados validados
+        password = validated_data.pop('password')
+        # Extrai email e username
+        email = validated_data.get('email', '')
+        username = validated_data['username']
+        # Cria a instância usando o método seguro do Django
+        user = User.objects.create_user(
+            username=username,
+            email=email,
+            password=password 
+        )
+        
+        try:
+            grupo_usuario = Group.objects.get(name='Usuario')
+            user.groups.add(grupo_usuario)
+        except Group.DoesNotExist:
+            pass 
+        
+        return user       
