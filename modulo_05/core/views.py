@@ -15,13 +15,6 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 logger = logging.getLogger(__name__)
 
-from rest_framework.generics import ListCreateAPIView
-from rest_framework.permissions import IsAuthenticated
-
-from .models import Tarefa
-from .serializers import TarefaSerializer
-
-
 class ListaTarefasAPIView(ListCreateAPIView):
     
 
@@ -36,7 +29,7 @@ class ListaTarefasAPIView(ListCreateAPIView):
        
         serializer.save(user=self.request.user)
 
-            
+
 class TarefasEstatisticasAPIView(APIView):
     
 
