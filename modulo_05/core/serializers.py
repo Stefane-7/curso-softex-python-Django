@@ -13,11 +13,11 @@ class TarefaSerializer(serializers.ModelSerializer):
             'max_length': 'O título não pode ter mais de 200 caracteres.'
         }
     )
-
+    user = serializers.StringRelatedField(read_only=True)
     class Meta:
         model = Tarefa
-        fields = ['id', 'titulo', 'concluida','criada_em','prioridade','prazo', 'data_conclusao']
-        read_only_fields = ['id', 'criada_em']
+        fields = ['id', 'titulo', 'user', 'concluida','criada_em','prioridade','prazo', 'data_conclusao']
+        read_only_fields = ['id', 'user', 'criada_em']
 
 
     def validate_titulo(self, value):
@@ -42,9 +42,11 @@ class TarefaSerializer(serializers.ModelSerializer):
 
 
     def validate(self, data):
-        prazo = data.get('prazo')
-        concluida = data.get('concluida', False)
         request = self.context.get('request')
+        metodo = request.method if request else None
+        prazo = data.get('prazo')
+        concluida = data.get('concluida', getattr(self.instance, 'concluida', False))
+        
 
         if prazo and prazo < date.today():
             raise serializers.ValidationError(
@@ -58,45 +60,36 @@ class TarefaSerializer(serializers.ModelSerializer):
                 
 )
             
-        metodo = request.method if request else None
 
-        prioridade = data.get(
-            'prioridade',
-            getattr(self.instance, 'prioridade', None)
-        )
+        if self.instance:
 
-        if (
-            prioridade == 'alta'
-            and concluida is True
-            and metodo == 'PATCH'
-        ):
-            raise serializers.ValidationError({
-                'concluida': 'Tarefas com prioridade ALTA só podem ser concluídas via PUT.'
-            })    
+            prioridade_atual = self.instance.prioridade
+            prioridade_nova = data.get('prioridade', prioridade_atual)
+
+          
+            if (
+                prioridade_atual == 'alta'
+                and concluida is True
+                and metodo == 'PATCH'
+            ):
+                raise serializers.ValidationError({
+                    'concluida': 'Tarefas com prioridade ALTA só podem ser concluídas via PUT.'
+                })
+
+           
+            if (
+                prioridade_atual == 'alta'
+                and prioridade_nova != prioridade_atual
+                and metodo == 'PATCH'
+            ):
+                raise serializers.ValidationError({
+                    'prioridade': 'A prioridade de uma tarefa ALTA não pode ser alterada via PATCH.'
+                })
+
         
-        prioridade_atual = self.instance.prioridade
-
-        if (
-            prioridade_atual == 'alta'
-            and 'prioridade' in data
-            and metodo == 'PATCH'
-        ):
-            raise serializers.ValidationError({
-                'prioridade': 'A prioridade de uma tarefa ALTA não pode ser alterada via PATCH.'
-            })    
-
-        concluida_atual = (
-        concluida 
-        
-        if concluida is not None 
-        else getattr(self.instance, 'concluida', False)
-    )
-
-        if concluida_atual:
-            
+        if concluida:
             data['data_conclusao'] = date.today()
         else:
-            
             data['data_conclusao'] = None
-        
+
         return data

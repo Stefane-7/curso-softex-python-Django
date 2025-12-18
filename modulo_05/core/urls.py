@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import ListaTarefasAPIView, TarefasEstatisticasAPIView, DetalheTarefaAPIView, DuplicarTarefaAPIView, ConcluirTodasTarefasAPIView
-from .views import MinhaView
+from .views import ListaTarefasAPIView, TarefasEstatisticasAPIView, DetalheTarefaAPIView, DuplicarTarefaAPIView, ConcluirTodasTarefasAPIView, LogoutView 
+from .views import MinhaView, ChangePasswordView
 app_name = 'core'
 urlpatterns = [
 
@@ -9,5 +9,7 @@ urlpatterns = [
     path('tarefas/concluir-todas/', ConcluirTodasTarefasAPIView.as_view(), name='concluir-todas'),
     path('tarefas/<int:pk>/duplicar/', DuplicarTarefaAPIView.as_view(), name='duplicar-tarefa'),
     path('tarefas/<int:pk>/', DetalheTarefaAPIView.as_view(), name='detalhe-tarefa'),
-    path('teste/', MinhaView.as_view(), name='....')
+    path('me/', MinhaView.as_view(), name='teste-autenticado'),
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('change-password/', ChangePasswordView.as_view(), name='change-password'), 
 ]
